@@ -10,7 +10,10 @@ import os
 from fpdf import FPDF
 import threading
 
-
+background="#407580"
+face_layer="#87A4B3"
+button_top="#a1d1cf"
+btn_activebackground="#649e9c"
 def folder_button():
     global folder_path
     folderbox.delete("1.0",tk.END)
@@ -157,11 +160,11 @@ frame00.place(relx=0.75,rely=0.5, anchor="center",relwidth=0.5,relheight=1)
 frame0=tk.Frame(root,bg="#87A4B3",bd=2)
 frame0.place(relx=0.25,rely=0.5, anchor="center",relwidth=0.5,relheight=1)
 ## frames
-frame1=tk.Frame(frame0,bg="#87A4B3",bd=5)
+frame1=tk.Frame(frame0,bg=face_layer,bd=5)
 frame1.pack(side=tk.TOP,fill=tk.BOTH,expand=True)
-frame2=tk.Frame(frame0,bg="#87A4B3",bd=5)
+frame2=tk.Frame(frame0,bg=face_layer,bd=5)
 frame2.pack(side=tk.TOP,fill=tk.BOTH,expand=True)
-frame3=tk.Frame(frame0,bg="#87A4B3",bd=5)
+frame3=tk.Frame(frame0,bg=face_layer,bd=5)
 frame3.pack(side=tk.TOP,fill=tk.BOTH,expand=True)
 
 tk.Grid.columnconfigure(frame1,0, weight=1) ## equal weight to all the columns
@@ -169,14 +172,14 @@ tk.Grid.columnconfigure(frame1,1, weight=1)
 tk.Grid.columnconfigure(frame1,2, weight=1)
 
 ## button to browse folder
-in_dir=tk.Button(frame1,text='Select Dir.',font='Helvetica 11 bold',height=2,
-                 relief=tk.RAISED,bd=5,command=folder_button)
+in_dir=tk.Button(frame1,text='Select Dir.',font='Helvetica 11 bold',height=2,cursor="hand2",activebackground=btn_activebackground,
+                 relief=tk.RAISED,bd=1,command=folder_button, bg=button_top)
 in_dir.grid(row=1,column=0,sticky="ew",padx=5,pady=5)
 
-in_label=tk.Label(frame1, text="Input Dir.",font='Helvetica 11 bold')
+in_label=tk.Label(frame1, text="Input Dir.",font='Helvetica 11 bold',bg=face_layer)
 in_label.grid(row=0,column=1,sticky="w",padx=1,pady=1)
 
-folderbox = tk.Text(frame1,width=10,height=5,bd=5,relief=tk.SUNKEN)
+folderbox = tk.Text(frame1,width=10,height=5,bd=2,relief=tk.SUNKEN,bg=background,fg="white")
 folderbox.grid(row=1,column=1,columnspan=2,sticky="ew",padx=1,pady=1)
 folderbox.grid_propagate(False)
 
@@ -184,15 +187,15 @@ tk.Grid.columnconfigure(frame2,0, weight=1) ## equal weight to all the columns
 tk.Grid.columnconfigure(frame2,1, weight=1)
 tk.Grid.columnconfigure(frame2,2, weight=1)
 
-## button to output folder
-out_dir=tk.Button(frame2,text='Output Dir.',font='Helvetica 11 bold',height=2,
-                  relief=tk.RAISED,bd=5,command=file_button)
+## button to output file
+out_dir=tk.Button(frame2,text='Output Dir.',font='Helvetica 11 bold',height=2,cursor="hand2",activebackground=btn_activebackground,
+                  relief=tk.RAISED,bd=1,command=file_button, bg=button_top)## bd is for depth of button to be sunken on press
 out_dir.grid(row=1,column=0,sticky="ew",padx=5,pady=5)
 
-in_label=tk.Label(frame2, text="Output file",font='Helvetica 11 bold')
+in_label=tk.Label(frame2, text="Output file",font='Helvetica 11 bold',bg=face_layer)
 in_label.grid(row=0,column=1,sticky="w",padx=1,pady=1)
 
-filebox = tk.Text(frame2,width=10,height=5,bd=5,relief=tk.SUNKEN)
+filebox = tk.Text(frame2,width=10,height=5,bd=2,relief=tk.SUNKEN,bg=background,fg="white")
 filebox.grid(row=1,rowspan=2,column=1,columnspan=2,sticky="ew",padx=1,pady=1)
 filebox.grid_propagate(False)
 
@@ -204,8 +207,8 @@ if thread_flag==True:
     runscript.configure(text="RUN",bg="deep sky blue")
     print("thread is closed")
 
-runscript=tk.Button(frame3,text='RUN',font='Helvetica 11 bold',width=10,height=2,
-        relief=tk.RAISED,bg="deep sky blue",bd=5,command=lambda: runbutton() )#pdf_gen(folderbox,filebox))#runbutton)
+runscript=tk.Button(frame3,text='RUN',font='Helvetica 11 bold',width=10,height=2,cursor="hand2",
+        relief=tk.RAISED,bg="deep sky blue",bd=2,command=lambda: runbutton() )#pdf_gen(folderbox,filebox))#runbutton)
 runscript.pack(side=tk.RIGHT)
 runscript["activebackground"] = 'red'
 
@@ -216,7 +219,7 @@ status=tk.Label(frame3, text=sts,font='Helvetica 11 bold',bd=5,bg='yellow green'
 status.pack(side=tk.RIGHT,padx=5,pady=5)
 processes=tk.Label(frame00, text="---Processings---",bd=5,bg='yellow')
 processes.pack(side=tk.TOP,fill=tk.X)
-outbox = tk.Text(frame00)
+outbox = tk.Text(frame00,bg=background,fg="white")
 outbox.pack(side=tk.TOP,fill=tk.BOTH,expand=True,padx=1,pady=1)
 
 
